@@ -11,3 +11,4 @@ echo "Provide ip"
 read ip
 response=$(curl -s https://ipwho.is/$ip)
 echo "$response" | grep -o '"city":"[^"]*"' | sed 's/.*"city":"\([^"]*\)".*/\1/'
+echo "$response" | grep -o '"latitude":"[^"]*"' | sed 's/.*"longitude":"\([^"]*\)".*/\1/'
