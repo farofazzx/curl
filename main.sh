@@ -10,4 +10,11 @@ echo "    |__|           \\/             ";
 echo "Provide ip"
 read ip
 response=$(curl -s https://ipwho.is/$ip)
-echo "$response" | grep -E '"(city|latitude|longitude|security.proxy|security.anonymous|security.tor|security.vpn)":"[^"]*"' | sed 's/.*"\([^"]*\)":"\([^"]*\)".*/\1: \2/'
+
+echo "=== Location ==="
+echo "$response" | grep -o '"City":"[^"]*"' | sed 's/.*"City":"\([^"]*\)".*/City: \1/'
+echo "$response" | grep -o '"Latitude":[^,}]*' | sed 's/.*"Latitude":\([^,]*\).*/Latitude: \1/'
+echo "$response" | grep -o '"Longitude":[^,}]*' | sed 's/.*"Longitude":\([^,]*\).*/Longitude: \1/'
+
+echo -e "\n=== Security ==="
+echo "$response" | grep -E '"security\.(anonymous|tor|vpn|proxy)"' | sed 's/.*"security\.\([^"]*\)":"\([^"]*\)".*/\1: \2/'
