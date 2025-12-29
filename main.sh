@@ -10,4 +10,5 @@ echo "    |__|           \\/             ";
 echo "Provide ip"
 read ip
 response=$(curl -s https://ipwho.is/$ip)
-echo "$response.city"
+element=$(echo "$response" | jq -r '.city')
+echo "$element"
