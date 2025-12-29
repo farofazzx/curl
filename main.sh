@@ -10,5 +10,4 @@ echo "    |__|           \\/             ";
 echo "Provide ip"
 read ip
 response=$(curl -s https://ipwho.is/$ip)
-element=$(echo "$response" | jq -r '.city')
-echo "$element"
+echo "$response" | grep -o '"city":"[^"]*"' | sed 's/.*"city":"\([^"]*\)".*/\1/'
