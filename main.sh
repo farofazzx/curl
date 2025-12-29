@@ -10,4 +10,4 @@ echo "    |__|           \\/             ";
 echo "Provide ip"
 read ip
 response=$(curl -s https://ipwho.is/$ip)
-echo "$response"
+echo "$response.city"
